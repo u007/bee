@@ -371,7 +371,7 @@ const (
 
 import(
 	"os"
-
+	"fmt"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/migration"
 
@@ -388,18 +388,22 @@ func main(){
 	switch task {
 	case "upgrade":
 		if err := migration.Upgrade({{LatestTime}}); err != nil {
+			fmt.Println(err.Error())
 			os.Exit(2)
 		}
 	case "rollback":
 		if err := migration.Rollback("{{LatestName}}"); err != nil {
+			fmt.Println(err.Error())
 			os.Exit(2)
 		}
 	case "reset":
 		if err := migration.Reset(); err != nil {
+			fmt.Println(err.Error())
 			os.Exit(2)
 		}
 	case "refresh":
 		if err := migration.Refresh(); err != nil {
+			fmt.Println(err.Error())
 			os.Exit(2)
 		}
 	}
